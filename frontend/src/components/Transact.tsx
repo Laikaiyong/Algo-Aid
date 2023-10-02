@@ -12,7 +12,7 @@ interface TransactInterface {
 
 const Transact = ({ openModal, setModalState }: TransactInterface) => {
   const [loading, setLoading] = useState<boolean>(false)
-  const [receiverAddress, setReceiverAddress] = useState<string>('')
+  const [receiverAddress, setReceiverAddress] = useState<string>('R3FCXSP2ZE5XLXXDZXXHFQ5W5K6G2QJ47UV3WNIVXZO76DIQGEVRDF24OI')
 
   const algodConfig = getAlgodConfigFromViteEnvironment()
   const algodClient = algokit.getAlgoClient({
@@ -65,16 +65,10 @@ const Transact = ({ openModal, setModalState }: TransactInterface) => {
       <form method="dialog" className="modal-box">
         <h3 className="font-bold text-lg">Send payment transaction</h3>
         <br />
-        <input
-          type="text"
-          data-test-id="receiver-address"
-          placeholder="Provide wallet address"
-          className="input input-bordered w-full"
-          value={receiverAddress}
-          onChange={(e) => {
-            setReceiverAddress(e.target.value)
-          }}
-        />
+        <div>
+          <p>Receiver address:</p>
+          <p>R3FCXSP2ZE5XLXXDZXXHFQ5W5K6G2QJ...</p>
+        </div>
         <div className="modal-action ">
           <button className="btn" onClick={() => setModalState(!openModal)}>
             Close
@@ -91,5 +85,16 @@ const Transact = ({ openModal, setModalState }: TransactInterface) => {
     </dialog>
   )
 }
+
+// <input
+//   type="text"
+//   data-test-id="receiver-address"
+//   placeholder="Provide wallet address"
+//   className="input input-bordered w-full"
+//   value={receiverAddress}
+//   onChange={(e) => {
+//     setReceiverAddress(e.target.value)
+//   }}
+// />
 
 export default Transact
