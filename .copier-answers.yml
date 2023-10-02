@@ -1,0 +1,19 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 0.4.3
+_src_path: gh:algorandfoundation/algokit-fullstack-template
+author_email: vandycklai@gmail.com
+author_name: Vandyck
+cloud_provider: none
+contract_name: smart_contract
+deployment_language: python
+ide_vscode: true
+preset_name: starter
+project_name: fund-raising
+python_linter: none
+use_dispenser: false
+use_github_actions: true
+use_python_black: true
+use_python_mypy: false
+use_python_pip_audit: true
+use_python_pytest: true
+
