@@ -1,0 +1,266 @@
+#pragma version 8
+intcblock 0 1 4 5
+bytecblock 0x151f7c75
+txn NumAppArgs
+intc_0 // 0
+==
+bnz main_l10
+txna ApplicationArgs 0
+pushbytes 0x4ac804fd // "initAidNft()uint64"
+==
+bnz main_l9
+txna ApplicationArgs 0
+pushbytes 0x8fd8724b // "purchaseAidNft(uint64)uint64"
+==
+bnz main_l8
+txna ApplicationArgs 0
+pushbytes 0x25e72747 // "sellAidNft()uint64"
+==
+bnz main_l7
+txna ApplicationArgs 0
+pushbytes 0x9cbe9d36 // "unlockAsset()void"
+==
+bnz main_l6
+err
+main_l6:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub unlockAssetcaster_7
+intc_1 // 1
+return
+main_l7:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub sellAidNftcaster_6
+intc_1 // 1
+return
+main_l8:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub purchaseAidNftcaster_5
+intc_1 // 1
+return
+main_l9:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub initAidNftcaster_4
+intc_1 // 1
+return
+main_l10:
+txn OnCompletion
+intc_0 // NoOp
+==
+bnz main_l12
+err
+main_l12:
+txn ApplicationID
+intc_0 // 0
+==
+assert
+intc_1 // 1
+return
+
+// initAidNft
+initAidNft_0:
+proto 0 1
+intc_0 // 0
+itxn_begin
+pushint 3 // acfg
+itxn_field TypeEnum
+pushbytes 0x575746 // "WWF"
+itxn_field ConfigAssetName
+pushint 1000 // 1000
+itxn_field ConfigAssetTotal
+intc_0 // 0
+itxn_field ConfigAssetDecimals
+pushbytes 0x68747470733a2f2f6c6f676f77696b2e636f6d2f636f6e74656e742f75706c6f6164732f696d616765732f3735335f7777662e6a7067 // "https://logowik.com/content/uploads/images/753_wwf.jpg"
+itxn_field ConfigAssetURL
+intc_0 // 0
+itxn_field ConfigAssetDefaultFrozen
+global CurrentApplicationAddress
+itxn_field ConfigAssetReserve
+global CurrentApplicationAddress
+itxn_field ConfigAssetManager
+global CurrentApplicationAddress
+itxn_field ConfigAssetFreeze
+global CurrentApplicationAddress
+itxn_field ConfigAssetClawback
+itxn_submit
+itxn CreatedAssetID
+frame_bury 0
+retsub
+
+// purchaseAidNft
+purchaseAidNft_1:
+proto 1 1
+intc_0 // 0
+txna Assets 0
+asset_params_get AssetCreator
+store 1
+store 0
+load 1
+intc_1 // 1
+==
+// ASA supplied must exist
+assert
+load 0
+global CurrentApplicationAddress
+==
+// ASA supplied must be created by Freeda Play app
+assert
+gtxn 0 TypeEnum
+intc_1 // pay
+==
+// First Txn in Group must be Payment
+assert
+gtxn 0 Receiver
+global CurrentApplicationAddress
+==
+// Receiver of Payment must be Application
+assert
+itxn_begin
+intc_2 // axfer
+itxn_field TypeEnum
+global CurrentApplicationAddress
+itxn_field Sender
+txn Sender
+itxn_field AssetReceiver
+intc_1 // 1
+itxn_field AssetAmount
+txna Assets 0
+itxn_field XferAsset
+itxn_submit
+itxn_begin
+intc_3 // afrz
+itxn_field TypeEnum
+txna Assets 0
+itxn_field FreezeAsset
+txn Sender
+itxn_field FreezeAssetAccount
+itxn_submit
+txn Sender
+frame_dig -1
+asset_holding_get AssetBalance
+store 2
+frame_bury 0
+retsub
+
+// sellAidNft
+sellAidNft_2:
+proto 0 1
+intc_0 // 0
+itxn_begin
+intc_2 // axfer
+itxn_field TypeEnum
+txn Sender
+itxn_field AssetSender
+global CurrentApplicationAddress
+itxn_field Sender
+global CurrentApplicationAddress
+itxn_field AssetReceiver
+intc_1 // 1
+itxn_field AssetAmount
+txna Assets 0
+itxn_field XferAsset
+itxn_submit
+itxn_begin
+intc_1 // pay
+itxn_field TypeEnum
+txn Sender
+itxn_field Receiver
+itxn_submit
+txn Sender
+txna Assets 0
+asset_holding_get AssetBalance
+store 3
+frame_bury 0
+retsub
+
+// unlockAsset
+unlockAsset_3:
+proto 0 0
+itxn_begin
+intc_3 // afrz
+itxn_field TypeEnum
+txna Assets 0
+itxn_field FreezeAsset
+txn Sender
+itxn_field FreezeAssetAccount
+intc_0 // 0
+itxn_field FreezeAssetFrozen
+itxn_submit
+retsub
+
+// initAidNft_caster
+initAidNftcaster_4:
+proto 0 0
+intc_0 // 0
+callsub initAidNft_0
+frame_bury 0
+bytec_0 // 0x151f7c75
+frame_dig 0
+itob
+concat
+log
+retsub
+
+// purchaseAidNft_caster
+purchaseAidNftcaster_5:
+proto 0 0
+intc_0 // 0
+dup
+txna ApplicationArgs 1
+btoi
+frame_bury 1
+frame_dig 1
+callsub purchaseAidNft_1
+frame_bury 0
+bytec_0 // 0x151f7c75
+frame_dig 0
+itob
+concat
+log
+retsub
+
+// sellAidNft_caster
+sellAidNftcaster_6:
+proto 0 0
+intc_0 // 0
+callsub sellAidNft_2
+frame_bury 0
+bytec_0 // 0x151f7c75
+frame_dig 0
+itob
+concat
+log
+retsub
+
+// unlockAsset_caster
+unlockAssetcaster_7:
+proto 0 0
+callsub unlockAsset_3
+retsub

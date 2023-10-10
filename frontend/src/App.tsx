@@ -34,21 +34,35 @@ class GroupProvider {
     {
       id: 1,
       title: 'World WildLife Fund',
-      description: 'Funding for Wildlife',
+      description: 'Funding for Wildlife and the Env',
       imageUrl: 'https://logowik.com/content/uploads/images/753_wwf.jpg',
     },
     {
       id: 2,
-      title: 'YAYASAN ZURIATCARE',
-      description: 'Sebuah yayasan amal di bawah Awqaf Holdings Berhad.',
-      imageUrl: 'https://ngohub-production.s3.amazonaws.com/logos/organization/1564/Thumbnail_Logo.jpg',
+      title: 'MERCY MALAYSIA',
+      description:
+        'MERCY Malaysia is an international NGO providing medical relief, sustainable health-related & risk reduction activities for vulnerable communities.',
+      imageUrl: 'https://www.mercy.org.my/wp-content/uploads/2019/02/logo-trace.png',
     },
     {
       id: 3,
-      title: 'Youth Build Nation (YBN)',
-      description: 'A nonprofit organisation aim to empower young Malaysians.',
-      imageUrl:
-        'https://ngohub-production.s3.amazonaws.com/header_images/organization/2773/header_94488791_255581725833536_6597782409104588800_o.png',
+      title: 'ACTION AGAINST HUNGER',
+      description:
+        'Action Against Hunger is a global humanitarian organization that takes decisive action against the causes and effects of hunger.',
+      imageUrl: 'https://www.actionagainsthunger.org/app/themes/actionagainsthunger/assets/images/aah-og.jpg',
+    },
+    {
+      id: 4,
+      title: 'Teach For Malaysia',
+      description: 'A nonprofit organisation aim to empower young Malaysians with Education.',
+      imageUrl: 'https://blog.theincitement.com/wp-content/uploads/2022/07/Teach-for-Malaysia-on-Incitement.jpg',
+    },
+    {
+      id: 5,
+      title: 'Mental Ilness Awareness & Support Association (MIASA)',
+      description:
+        'MIASA is To be the leading voice in mental health education in support of people with mental health disorders in Malaysia.',
+      imageUrl: 'https://www.miasa.org.my/images/MIASA-LOGO-2022-PNG-300x264.png',
     },
   ]
 }
@@ -108,16 +122,16 @@ export default function App() {
                     <a href="/">Dashboard</a>
                   </li>
                   <li>
-                    <a>Category</a>
+                    <a href="/category">Category</a>
                   </li>
                   <li>
-                    <a href="">FundRaise</a>
+                    <a href="/fundraise">FundRaise</a>
                   </li>
                   <li>
-                    <a>Donation History</a>
+                    <a href="/donation">Donation History</a>
                   </li>
                   <li>
-                    <a>Profile</a>
+                    <a href="/profile">Profile</a>
                   </li>
                 </ul>
               </div>
@@ -151,8 +165,9 @@ export default function App() {
                               style={{
                                 minHeight: '150px',
                                 maxHeight: '150px',
+                                maxWidth: '150px',
                                 borderRadius: '20px',
-                                objectFit: 'cover',
+                                objectFit: 'scale-down',
                               }}
                               src={group.imageUrl}
                               alt="Movie"
@@ -188,16 +203,16 @@ export default function App() {
                 <a href="/">Dashboard</a>
               </li>
               <li>
-                <a>Category</a>
+                <a href="/category">Category</a>
               </li>
               <li>
-                <a href="">FundRaise</a>
+                <a href="/fundraise">FundRaise</a>
               </li>
               <li>
-                <a>Donation History</a>
+                <a href="/donation">Donation History</a>
               </li>
               <li>
-                <a>Profile</a>
+                <a href="/profile">Profile</a>
               </li>
             </ul>
           </div>

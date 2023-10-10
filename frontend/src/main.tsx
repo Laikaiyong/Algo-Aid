@@ -5,7 +5,10 @@ import FundRaisePage from './App'
 import ErrorBoundary from './components/ErrorBoundary'
 import './styles/main.css'
 
+import CategoryPage from './pages/CategoryPage'
 import DashboardPage from './pages/DashboardPage'
+import DonationHistoryPage from './pages/DonationHistoryPage'
+import ProfilePage from './pages/ProfilePage'
 
 const router = createBrowserRouter([
   {
@@ -15,6 +18,18 @@ const router = createBrowserRouter([
   {
     path: '/fundraise',
     element: <FundRaisePage />,
+  },
+  {
+    path: '/category',
+    element: <CategoryPage />,
+  },
+  {
+    path: '/donation',
+    element: <DonationHistoryPage />,
+  },
+  {
+    path: '/profile',
+    element: <ProfilePage />,
   },
 ])
 

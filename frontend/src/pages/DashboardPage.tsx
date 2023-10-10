@@ -75,16 +75,16 @@ export default function App() {
                   <a href="/">Dashboard</a>
                 </li>
                 <li>
-                  <a>Category</a>
+                  <a href="/category">Category</a>
                 </li>
                 <li>
                   <a href="/fundraise">FundRaise</a>
                 </li>
                 <li>
-                  <a>Donation History</a>
+                  <a href="/donation">Donation History</a>
                 </li>
                 <li>
-                  <a>Profile</a>
+                  <a href="/profile">Profile</a>
                 </li>
               </ul>
             </div>
